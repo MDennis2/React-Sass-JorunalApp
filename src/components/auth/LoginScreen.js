@@ -1,12 +1,35 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { login, startGoogleLogin, startLoginEmailPassword } from '../../actions/auth';
+import { useForm } from '../../hooks/useForm';
 
 export const LoginScreen = () => {
+
+    const dispatch = useDispatch();
+
+    const {loading} = useSelector( state => state.ui );
+
+    const [ formValues, handleInputChange] = useForm({
+        email:'dennis.mihaita10@gmail.com',
+        password: '123456'
+    });
+    const handleGoogleLogin =() =>{
+        dispatch(startGoogleLogin());
+    }
+
+    const {email, password} = formValues;
+
+    const handleLogin = (e) =>{
+        e.preventDefault();
+        dispatch(startLoginEmailPassword(email, password));
+    }
+
     return (
         <>
             <h3 className="auth__title">Login</h3>
 
-            <form>
+            <form onSubmit={handleLogin}>
 
                 <input 
                     type="text"
@@ -14,6 +37,8 @@ export const LoginScreen = () => {
                     name="email"
                     className="auth__input"
                     autoComplete="off"
+                    onChange={handleInputChange}
+                    value={email}
                 />
 
                 <input 
@@ -21,12 +46,15 @@ export const LoginScreen = () => {
                     placeholder="Password"
                     name="password"
                     className="auth__input"
+                    onChange={handleInputChange}
+                    value={password}
                 />
 
 
                 <button
                     type="submit"
                     className="btn btn-primary btn-block"
+                    disabled= {loading}
                 >
                     Login
                 </button>
@@ -35,7 +63,8 @@ export const LoginScreen = () => {
                 <div className="auth__social-networks">
                     <p>Login with social networks</p>
 
-                    <div 
+                    <div
+                        onClick={handleGoogleLogin} 
                         className="google-btn"
                     >
                         <div className="google-icon-wrapper">
