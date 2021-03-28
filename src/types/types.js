@@ -1,12 +1,11 @@
 
 
-
 export const types = {
+
     login: '[Auth] Login',
     logout: '[Auth] Logout',
 
-
-    uiSetError : '[UI] Set Error',
+    uiSetError: '[UI] Set Error',
     uiRemoveError: '[UI] Remove Error',
 
     uiStartLoading: '[UI] Start loading',
@@ -15,8 +14,9 @@ export const types = {
     notesAddNew: '[Notes] New note',
     notesActive: '[Notes] Set active note',
     notesLoad: '[Notes] Load notes',
-    notesUpdated: '[Notes] Upgrade note',
-    notesFileUrl: '[Notes] Upgrade image url',
+    notesUpdated: '[Notes] Updated note',
+    notesFileUrl: '[Notes] Updated image url',
     notesDelete: '[Notes] Delete note',
-    notesLogoutCleaning:'[Notes] Logout Cleaning'
+    notesLogoutCleaning: '[Notes] Logout Cleaning',
+
 }
